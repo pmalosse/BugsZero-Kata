@@ -1,12 +1,13 @@
 package com.adaptionsoft.games.uglytrivia;
 
+import com.adaptionsoft.games.trivia.runner.Questions;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 
 public class Game {
     ArrayList players = new ArrayList();
-	ArrayList questions = new ArrayList();
+	ArrayList questions_case = new ArrayList();
 
     int[] places = new int[6];
     int[] purses  = new int[6];
@@ -19,25 +20,15 @@ public class Game {
     
     int currentPlayer = 0;
     boolean isGettingOutOfPenaltyBox;
-    
+
+	Questions questions = new Questions();
     public  Game(){
     	for (int q=0; q < 3; q++){
-			questions.add("Pop");
-			questions.add("Science");
-			questions.add("Sports");
-			questions.add("Rock");
+			questions_case.add("Pop");
+			questions_case.add("Science");
+			questions_case.add("Sports");
+			questions_case.add("Rock");
 		}
-
-    	for (int i = 0; i < 50; i++) {
-			popQuestions.addLast("Pop Question " + i);
-			scienceQuestions.addLast(("Science Question " + i));
-			sportsQuestions.addLast(("Sports Question " + i));
-			rockQuestions.addLast(createRockQuestion(i));
-    	}
-    }
-
-	public String createRockQuestion(int index){
-		return "Rock Question " + index;
 	}
 
 	public boolean isPlayable() {
@@ -96,18 +87,18 @@ public class Game {
 
 	private void askQuestion() {
 		if (currentCategory() == "Pop")
-			System.out.println(popQuestions.removeFirst());
+			System.out.println(questions.popQuestions.removeFirst());
 		if (currentCategory() == "Science")
-			System.out.println(scienceQuestions.removeFirst());
+			System.out.println(questions.scienceQuestions.removeFirst());
 		if (currentCategory() == "Sports")
-			System.out.println(sportsQuestions.removeFirst());
+			System.out.println(questions.sportsQuestions.removeFirst());
 		if (currentCategory() == "Rock")
-			System.out.println(rockQuestions.removeFirst());		
+			System.out.println(questions.rockQuestions.removeFirst());
 	}
 	
 	
 	private String currentCategory() {
- 		return questions.get(places[currentPlayer]).toString();
+ 		return questions_case.get(places[currentPlayer]).toString();
 	}
 
 	public boolean wasCorrectlyAnswered() {
