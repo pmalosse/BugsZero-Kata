@@ -7,7 +7,6 @@ import java.util.LinkedList;
 
 public class Game {
     ArrayList players = new ArrayList();
-	ArrayList questions_case = new ArrayList();
 
     int[] places = new int[6];
     int[] purses  = new int[6];
@@ -23,12 +22,6 @@ public class Game {
 
 	Questions questions = new Questions();
     public  Game(){
-    	for (int q=0; q < 3; q++){
-			questions_case.add("Pop");
-			questions_case.add("Science");
-			questions_case.add("Sports");
-			questions_case.add("Rock");
-		}
 	}
 
 	public boolean isPlayable() {
@@ -98,7 +91,7 @@ public class Game {
 	
 	
 	private String currentCategory() {
- 		return questions_case.get(places[currentPlayer]).toString();
+ 		return questions.cases.get(places[currentPlayer]).toString();
 	}
 
 	public boolean wasCorrectlyAnswered() {
