@@ -2,9 +2,12 @@ package com.adaptionsoft.games.uglytrivia;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 public class Game {
     ArrayList players = new ArrayList();
+	ArrayList questions = new ArrayList();
+
     int[] places = new int[6];
     int[] purses  = new int[6];
     boolean[] inPenaltyBox  = new boolean[6];
@@ -18,6 +21,13 @@ public class Game {
     boolean isGettingOutOfPenaltyBox;
     
     public  Game(){
+    	for (int q=0; q < 3; q++){
+			questions.add("Pop");
+			questions.add("Science");
+			questions.add("Sports");
+			questions.add("Rock");
+		}
+
     	for (int i = 0; i < 50; i++) {
 			popQuestions.addLast("Pop Question " + i);
 			scienceQuestions.addLast(("Science Question " + i));
@@ -97,16 +107,7 @@ public class Game {
 	
 	
 	private String currentCategory() {
-		if (places[currentPlayer] == 0) return "Pop";
-		if (places[currentPlayer] == 4) return "Pop";
-		if (places[currentPlayer] == 8) return "Pop";
-		if (places[currentPlayer] == 1) return "Science";
-		if (places[currentPlayer] == 5) return "Science";
-		if (places[currentPlayer] == 9) return "Science";
-		if (places[currentPlayer] == 2) return "Sports";
-		if (places[currentPlayer] == 6) return "Sports";
-		if (places[currentPlayer] == 10) return "Sports";
-		return "Rock";
+ 		return questions.get(places[currentPlayer]).toString();
 	}
 
 	public boolean wasCorrectlyAnswered() {
@@ -127,7 +128,7 @@ public class Game {
 			} else {
 				currentPlayer++;
 				if (currentPlayer == players.size()) currentPlayer = 0;
-				return true;
+				return false;
 			}
 			
 			
@@ -156,11 +157,11 @@ public class Game {
 		
 		currentPlayer++;
 		if (currentPlayer == players.size()) currentPlayer = 0;
-		return true;
+		return false;
 	}
 
 
 	private boolean didPlayerWin() {
-		return !(purses[currentPlayer] == 6);
+		return (purses[currentPlayer] == 6);
 	}
 }
